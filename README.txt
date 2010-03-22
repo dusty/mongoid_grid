@@ -12,12 +12,19 @@ Mongoid::Grid / Rack::Grid
 
 Installation
 
-  Put the libraries in your project however you want.  
+  Put the libraries in your project however you want. 
   
-  # As a gem you could
+  You could make a gem to install or use with bundler.
+  
+  # git clone http://github.com/dusty/mongoid_grid
+  # gem build mongoid_grid.gemspec
+  
+  Then require the libraries you want to use.
+
   require 'mongoid/grid'
   require 'rack/grid'
-  
+
+
 Usage
 
   class Monkey
