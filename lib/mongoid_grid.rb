@@ -57,9 +57,9 @@ module Mongoid
         # Return the relative URL to the file for use with Rack::Grid
         # eg: /grid/4ba69fde8c8f369a6e000003/somefile.png
         define_method("#{name}_url") do
-          id   = attributes["#{name}_id"]
-          name = attributes["#{name}_name"]
-          "/#{prefix}/#{id}/#{name}" if id && name
+          _id   = send("#{name}_id")
+          _name = send("#{name}_name")
+          ["/#{prefix}", _id, _name].join('/') if _id && _name
         end
 
       end
@@ -105,7 +105,7 @@ module Mongoid
         if file.respond_to?(:read)
           filename = file.respond_to?(:original_filename) ? 
                      file.original_filename : File.basename(file.path)
-          type = MIME::Types.type_for(file).first
+          type = MIME::Types.type_for(filename).first
           mime = type ? type.content_type : "application/octet-stream" 
           send("#{name}_id=",   Mongo::ObjectID.new)
           send("#{name}_name=", filename)
