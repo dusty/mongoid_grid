@@ -5,8 +5,8 @@ Gem::Specification.new do |s|
   s.email = "github@dusty.name" 
   s.homepage = "http://code.dusty.name" 
   s.platform = Gem::Platform::RUBY
-  s.summary = "Plugin for Mongoid to use GridFS with a Rack helper" 
-  s.description = "Plugin for Mongoid to use GridFS with a Rack helper" 
+  s.summary = "Plugin for Mongoid to use GridFS and a Rack helper" 
+  s.description = "Plugin for Mongoid to use GridFS and a Rack helper" 
   s.files = [
     "README.txt",
     "lib/mongoid_grid.rb",
