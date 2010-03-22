@@ -17,6 +17,7 @@ Installation
   You could make a gem to install or use with bundler.
   
   # git clone http://github.com/dusty/mongoid_grid
+  # cd mongoid_grid
   # gem build mongoid_grid.gemspec
   
   Then require the libraries you want to use.
