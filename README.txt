@@ -12,7 +12,11 @@ Mongoid::Grid / Rack::Grid
 
 Installation
 
-  Put the library in your project however you want.
+  Put the libraries in your project however you want.  
+  
+  # As a gem you could
+  require 'mongoid/grid'
+  require 'rack/grid'
   
 Usage
 

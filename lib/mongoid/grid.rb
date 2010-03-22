@@ -1,5 +1,5 @@
 require 'mime/types'
-
+require 'mongoid'
 module Mongoid
   module Grid
     

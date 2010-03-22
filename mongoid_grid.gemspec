@@ -9,15 +9,14 @@ Gem::Specification.new do |s|
   s.description = "Plugin for Mongoid to use GridFS and a Rack helper" 
   s.files = [
     "README.txt",
-    "lib/mongoid_grid.rb",
-    "lib/rack_grid.rb",
+    "lib/mongoid/grid.rb",
+    "lib/rack/grid.rb",
     "test/test_mongoid_grid.rb",
     "test/test_rack_grid.rb"
   ]
   s.has_rdoc = true 
   s.extra_rdoc_files = ["README.txt"]
-  s.add_dependency('mongo')
+  s.add_dependency('mime-types')
   s.add_dependency('mongoid')
-  s.add_dependency('rack')
   s.rubyforge_project = "none"
 end
