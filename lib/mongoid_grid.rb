@@ -57,9 +57,9 @@ module Mongoid
         # Return the relative URL to the file for use with Rack::Grid
         # eg: /grid/4ba69fde8c8f369a6e000003/somefile.png
         define_method("#{name}_url") do
-          if attributes["#{name}_id"] && attributes["#{name}_name"]
-            "/#{prefix}/#{name}_id/#{name}_name"
-          end
+          id   = attributes["#{name}_id"]
+          name = attributes["#{name}_name"]
+          "/#{prefix}/#{id}/#{name}" if id && name
         end
 
       end
