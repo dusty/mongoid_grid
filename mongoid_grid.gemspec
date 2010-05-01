@@ -17,6 +17,6 @@ Gem::Specification.new do |s|
   s.has_rdoc = true 
   s.extra_rdoc_files = ["README.txt"]
   s.add_dependency('mime-types')
-  s.add_dependency('mongoid')
+  s.add_dependency('mongoid', ">= 2.0.0.beta4")
   s.rubyforge_project = "none"
 end
