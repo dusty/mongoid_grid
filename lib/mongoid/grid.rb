@@ -120,7 +120,7 @@ module Mongoid
       def create_grid_attachment(name,file)
         grid.put(
           file.read, 
-          attributes["#{name}_name"],
+          :filename => attributes["#{name}_name"],
           :content_type => attributes["#{name}_type"],
           :_id => attributes["#{name}_id"]
         )
