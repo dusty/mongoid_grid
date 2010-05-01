@@ -26,7 +26,7 @@ module Mongoid
         #
         # Only the _id is really needed, the others are helpful cached
         # so you don't need to hit GridFS
-        field "#{name}_id".to_sym,   :type => Mongo::ObjectID
+        field "#{name}_id".to_sym,   :type => BSON::ObjectID
         field "#{name}_name".to_sym, :type => String
         field "#{name}_size".to_sym, :type => Integer
         field "#{name}_type".to_sym, :type => String
@@ -107,7 +107,7 @@ module Mongoid
                      file.original_filename : File.basename(file.path)
           type = MIME::Types.type_for(filename).first
           mime = type ? type.content_type : "application/octet-stream" 
-          send("#{name}_id=",   Mongo::ObjectID.new)
+          send("#{name}_id=",   BSON::ObjectID.new)
           send("#{name}_name=", filename)
           send("#{name}_size=", File.size(file))
           send("#{name}_type=", mime)
@@ -130,7 +130,7 @@ module Mongoid
       ##
       # Attachments we need to remove after save
       def delete_attachment(name,id)
-        delete_attachment_queue[name] = id if id.is_a?(Mongo::ObjectID)
+        delete_attachment_queue[name] = id if id.is_a?(BSON::ObjectID)
         send("#{name}_id=", nil)
         send("#{name}_name=", nil)
         send("#{name}_size=", nil)
@@ -140,7 +140,7 @@ module Mongoid
       ##
       # Delete an attachment from GridFS
       def delete_grid_attachment(name,id)
-        grid.delete(id) if id.is_a?(Mongo::ObjectID)
+        grid.delete(id) if id.is_a?(BSON::ObjectID)
         delete_attachment_queue.delete(name)
       end
       
