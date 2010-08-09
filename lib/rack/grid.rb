@@ -8,12 +8,21 @@ module Rack
     attr_reader :host, :port, :database, :prefix, :db, :username, :password
 
     def initialize(app, options = {})
+      options = options.each do |k,v| 
+        if k.is_a?(Symbol)
+          options[k.to_s] = v
+          options.delete(k)
+        end
+      end
       options = {
         'host'    => 'localhost',
-        'prefix'  => 'grid',
-        'port'    => Mongo::Connection::DEFAULT_PORT,
+        'prefix'  => 'grid'
       }.merge(options)
 
+
+      ,
+      'port'    => Mongo::Connection::DEFAULT_PORT,
+      
       @app        = app
       @host       = options['host']
       @port       = options['port']
