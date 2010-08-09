@@ -16,12 +16,9 @@ module Rack
       end
       options = {
         'host'    => 'localhost',
-        'prefix'  => 'grid'
+        'prefix'  => 'grid',
+        'port'    => Mongo::Connection::DEFAULT_PORT
       }.merge(options)
-
-
-      ,
-      'port'    => Mongo::Connection::DEFAULT_PORT,
       
       @app        = app
       @host       = options['host']
