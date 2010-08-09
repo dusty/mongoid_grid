@@ -1,6 +1,6 @@
 Gem::Specification.new do |s| 
   s.name = "mongoid_grid" 
-  s.version = "0.0.2" 
+  s.version = "0.0.3" 
   s.author = "Dusty Doris" 
   s.email = "github@dusty.name" 
   s.homepage = "http://code.dusty.name" 
@@ -17,6 +17,6 @@ Gem::Specification.new do |s|
   s.has_rdoc = true 
   s.extra_rdoc_files = ["README.txt"]
   s.add_dependency('mime-types')
-  s.add_dependency('mongoid', ">= 2.0.0.beta4")
+  s.add_dependency('mongoid', ">= 2.0.0.beta.16")
   s.rubyforge_project = "none"
 end
