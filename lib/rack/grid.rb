@@ -9,18 +9,18 @@ module Rack
 
     def initialize(app, options = {})
       options = {
-        :host    => 'localhost',
-        :prefix  => 'grid',
-        :port    => Mongo::Connection::DEFAULT_PORT,
+        'host'    => 'localhost',
+        'prefix'  => 'grid',
+        'port'    => Mongo::Connection::DEFAULT_PORT,
       }.merge(options)
 
       @app        = app
-      @host       = options[:host] || options['host']
-      @port       = options[:port] || options['port']
-      @database   = options[:database] || options['database']
-      @prefix     = options[:prefix] || options['prefix']
-      @username   = options[:username] || options['username']
-      @password   = options[:password] || options['password']
+      @host       = options['host']
+      @port       = options['port']
+      @database   = options['database']
+      @prefix     = options['prefix']
+      @username   = options['username']
+      @password   = options['password']
       @db         = nil
 
       connect!
