@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.version = "0.0.3" 
   s.author = "Dusty Doris" 
   s.email = "github@dusty.name" 
-  s.homepage = "http://code.dusty.name" 
+  s.homepage = "http://github.com/dusty/mongoid_grid" 
   s.platform = Gem::Platform::RUBY
   s.summary = "Plugin for Mongoid to use GridFS and a Rack helper" 
   s.description = "Plugin for Mongoid to use GridFS and a Rack helper" 
