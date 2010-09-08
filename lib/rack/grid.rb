@@ -4,22 +4,18 @@ require 'mongo'
 module Rack
   class Grid
     class ConnectionError < StandardError ; end
-    
-    attr_reader :host, :port, :database, :prefix, :db, :username, :password
+
+    attr_reader :host, :port, :database, :prefix, :username, :password
 
     def initialize(app, options = {})
-      options = options.each do |k,v| 
-        if k.is_a?(Symbol)
-          options[k.to_s] = v
-          options.delete(k)
-        end
-      end
+      opts = {}
+      options.each { |k,v|  opts[k.to_s] = v }
       options = {
         'host'    => 'localhost',
         'prefix'  => 'grid',
         'port'    => Mongo::Connection::DEFAULT_PORT
-      }.merge(options)
-      
+      }.merge(opts)
+
       @app        = app
       @host       = options['host']
       @port       = options['port']
@@ -27,9 +23,13 @@ module Rack
       @prefix     = options['prefix']
       @username   = options['username']
       @password   = options['password']
-      @db         = nil
+      @db         = options['db']
+    end
 
-      connect!
+    def db
+      @db = @db.call()  if Proc === @db
+      connect!  unless @db
+      @db
     end
 
     ##
@@ -63,6 +63,6 @@ module Rack
     rescue StandardError => e
       raise ConnectionError, "Timeout connecting to GridFS (#{e.to_s})"
     end
-    
+
   end
 end
