@@ -1,6 +1,6 @@
 Gem::Specification.new do |s| 
   s.name = "mongoid_grid" 
-  s.version = "0.0.6" 
+  s.version = "0.0.7" 
   s.author = "Dusty Doris" 
   s.email = "github@dusty.name" 
   s.homepage = "http://github.com/dusty/mongoid_grid" 
