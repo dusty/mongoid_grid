@@ -51,7 +51,7 @@ module Rack
     ##
     # Get file from GridFS or return a 404
     def grid_request(id)
-      file = Mongo::Grid.new(db).get(BSON::ObjectID.from_string(id))
+      file = Mongo::Grid.new(db).get(BSON::ObjectId.from_string(id))
 
       etag, last_modified = file.instance_variable_get(:@md5), Time.at( file.upload_date.to_i )
       headers = {
@@ -64,7 +64,7 @@ module Rack
       else
         [200, headers.update('Content-Type' => file.content_type), [file.read]]
       end
-    rescue Mongo::GridError, BSON::InvalidObjectID
+    rescue Mongo::GridError, BSON::InvalidObjectId
       [404, {'Content-Type' => 'text/plain'}, ['File not found.']]
     end
 
