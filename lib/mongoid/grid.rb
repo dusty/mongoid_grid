@@ -54,6 +54,17 @@ module Mongoid
         end
 
         ##
+        # Create a method to set the attachment for binary string.
+        # eg: object.set_image(binary_string, "generated_filename.png")
+        define_method("set_#{name}") do |binary, filename|
+          if !binary.nil?
+            send(:create_attachment_raw, name, binary, filename)
+          else
+            send(:delete_attachment, name, send("#{name}_id"))
+          end
+        end
+
+        ##
         # Return the relative URL to the file for use with Rack::Grid
         # eg: /grid/4ba69fde8c8f369a6e000003/somefile.png
         define_method("#{name}_url") do
@@ -116,10 +127,24 @@ module Mongoid
       end
 
       ##
+      # Attachments we need to add after save.
+      # For binary String data.
+      def create_attachment_raw(name, binary, filename)
+        type = MIME::Types.type_for(filename).first
+        mime = type ? type.content_type : "application/octet-stream"
+        send("#{name}_id=",   BSON::ObjectId.new)
+        send("#{name}_name=", filename)
+        send("#{name}_size=", binary.size)
+        send("#{name}_type=", mime)
+        create_attachment_queue[name] = binary
+      end
+
+      ##
       # Save an attachment to GridFS
       def create_grid_attachment(name,file)
+        data = file.respond_to?(:read) ? file.read : file
         grid.put(
-          file.read,
+          data,
           :filename => attributes["#{name}_name"],
           :content_type => attributes["#{name}_type"],
           :_id => attributes["#{name}_id"]
