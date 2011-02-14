@@ -19,7 +19,7 @@ module Mongoid
         # Callbacks to handle the attachment saving and deleting
         after_save     :create_attachments
         after_save     :delete_attachments
-        after_destroy  :destroy_attachments
+        after_destroy  :destroy_attachments, :delete_attachments
 
         ##
         # Fields for the attachment.
@@ -161,14 +161,11 @@ module Mongoid
       # Attachments we need to remove after save
       def delete_attachment(name,id)
         delete_attachment_queue[name] = id if id.is_a?(BSON::ObjectId)
-        begin
+        unless destroyed?
           send("#{name}_id=", nil)
           send("#{name}_name=", nil)
           send("#{name}_size=", nil)
           send("#{name}_type=", nil)
-        rescue RuntimeError => e
-          # We can't set attributes to nil if we're deleting the parent object
-          raise e unless e.message == "can't modify frozen hash"
         end
       end
 
