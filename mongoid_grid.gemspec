@@ -12,7 +12,6 @@ Gem::Specification.new do |s|
     "lib/mongoid_grid.rb",
     "test/test_mongoid_grid.rb"
   ]
-  s.has_rdoc = true
   s.extra_rdoc_files = ["README.txt"]
   s.add_dependency('mime-types')
   s.rubyforge_project = "none"
